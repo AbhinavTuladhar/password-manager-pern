@@ -3,6 +3,6 @@ import authRouter from './auth.route'
 
 const apiRouter = Router()
 
-apiRouter.use(authRouter)
+apiRouter.use('/master-user', authRouter)
 
 export default apiRouter

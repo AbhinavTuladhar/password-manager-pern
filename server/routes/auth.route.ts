@@ -35,4 +35,25 @@ authRouter.post('/register', async (req: Request<{}, {}, Credentials>, res) => {
     .json({ message: 'Master user successfully created.', id: newUser.id })
 })
 
+authRouter.post('/login', async (req: Request<{}, {}, Credentials>, res) => {
+  const { password: sentPassword } = req.body
+
+  const foundUser = await prisma.masterUser.findFirst()
+
+  if (!foundUser) {
+    return res.status(400).json({ message: 'Master user not found.' })
+  }
+
+  const { passwordHash } = foundUser
+
+  // Check if the passwords match
+  const passwordMatch = await bcrypt.compare(sentPassword, passwordHash)
+
+  if (passwordMatch) {
+    return res.status(200).json({ message: 'Successfully logged in!' })
+  } else {
+    return res.status(400).json({ message: 'The password does not match!' })
+  }
+})
+
 export default authRouter
