@@ -1,8 +1,10 @@
 import { Request, Router } from 'express'
 import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 
 import { Credentials } from '../types'
+import jwtOptions from '../config/jwt.config'
 
 const authRouter = Router()
 const prisma = new PrismaClient()
@@ -30,9 +32,7 @@ authRouter.post('/register', async (req: Request<{}, {}, Credentials>, res) => {
     },
   })
 
-  return res
-    .status(201)
-    .json({ message: 'Master user successfully created.', id: newUser.id })
+  return res.status(201).json({ message: 'Master user successfully created.', id: newUser.id })
 })
 
 authRouter.post('/login', async (req: Request<{}, {}, Credentials>, res) => {
@@ -50,7 +50,11 @@ authRouter.post('/login', async (req: Request<{}, {}, Credentials>, res) => {
   const passwordMatch = await bcrypt.compare(sentPassword, passwordHash)
 
   if (passwordMatch) {
-    return res.status(200).json({ message: 'Successfully logged in!' })
+    // Sign the JWT token
+    const { passwordHash, ...user } = foundUser
+    const token = jwt.sign(user, process.env.JWT_SECRET, jwtOptions)
+
+    return res.status(200).json({ message: 'Successfully logged in!', accessToken: token })
   } else {
     return res.status(400).json({ message: 'The password does not match!' })
   }

@@ -1,9 +1,10 @@
 import express from 'express'
-import session from 'express-session'
 
 import apiRouter from './routes/api.route'
+import { loggingMiddleware } from './middlewares/login'
 
 const app = express()
+app.use(loggingMiddleware)
 
 app.use(express.json())
 app.use(apiRouter)
