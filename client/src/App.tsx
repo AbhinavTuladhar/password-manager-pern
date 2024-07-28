@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-import Register from './components/register'
+import Navbar from './components/navbar'
+import AppRouter from './components/router'
 
 const App = () => {
   const client = new QueryClient()
@@ -8,7 +9,8 @@ const App = () => {
   return (
     <QueryClientProvider client={client}>
       <div className="min-h-dvh bg-slate-800 text-white">
-        <Register />
+        <Navbar />
+        <AppRouter />
       </div>
     </QueryClientProvider>
   )
