@@ -1,7 +1,6 @@
 import express from 'express'
 
 import apiRouter from './routes/api.route'
-import { loggingMiddleware } from './middlewares/login'
 import authenticateJWT from './middlewares/authenticateJWT'
 
 const app = express()
