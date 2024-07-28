@@ -8,3 +8,9 @@ export interface WebsiteBody {
   url: string
   userId: string
 }
+
+export interface AccountBody {
+  userName: string
+  password: string
+  websiteId: string
+}
