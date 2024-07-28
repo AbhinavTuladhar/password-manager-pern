@@ -1,3 +1,41 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.button {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  border: 1px solid black;
+  transition: all 0.3s ease-out;
+  padding: 0.5rem 1rem;
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease-out;
+}
+
+.button:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.button--white {
+  border: 1px solid white;
+  color: white;
+}
+
+.button--white::before {
+  background-color: white;
+}
+
+.button--white:hover {
+  color: black;
+}
