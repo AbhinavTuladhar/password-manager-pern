@@ -45,6 +45,8 @@ export const loginUser = async (req: Request<{}, {}, Credentials>, res: Response
   // Check if the passwords match
   const passwordMatch = await bcrypt.compare(sentPassword, passwordHash)
 
+  console.log(foundUser.id)
+
   if (passwordMatch) {
     // Sign the JWT token
     const { passwordHash, ...user } = foundUser
