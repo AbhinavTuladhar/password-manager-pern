@@ -3,6 +3,9 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      width: {
+        container: 'clamp(16.25rem, 10.179rem + 30.357vw, 37.5rem)',
+      },
       colors: {
         'primary-100': '#2563eb',
         'primary-200': '#5173ee',
