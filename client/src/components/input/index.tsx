@@ -1,17 +1,23 @@
-import { FC, InputHTMLAttributes, useState } from 'react'
-import type { FieldError, RegisterOptions, UseFormRegister } from 'react-hook-form'
+import { InputHTMLAttributes, useState } from 'react'
+import type { FieldError, Path, RegisterOptions, UseFormRegister } from 'react-hook-form'
 
-import EyeIcon from '../../assets/eye-icon.svg'
-import { RegisterFields, RegisterProps } from '../../types/forms'
+import EyeIcon from '@/assets/eye-icon.svg'
 
-interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
-  name: RegisterFields
-  register: UseFormRegister<RegisterProps>
+interface GenericInputProps<T extends object> extends InputHTMLAttributes<HTMLInputElement> {
+  name: Path<T>
+  register: UseFormRegister<T>
   error: FieldError | undefined
-  options?: RegisterOptions<RegisterProps, RegisterFields>
+  options?: RegisterOptions<T, Path<T>>
 }
 
-const Input: FC<InputFieldProps> = ({ type, options, name, register, error, ...props }) => {
+const Input = <T extends object>({
+  type,
+  options,
+  name,
+  register,
+  error,
+  ...props
+}: GenericInputProps<T>) => {
   const [inputType, setInputType] = useState(type)
 
   return (

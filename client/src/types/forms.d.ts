@@ -3,4 +3,6 @@ export interface RegisterProps {
   confirmPassword: string
 }
 
-export type RegisterFields = keyof RegisterProps
+export interface LoginProps {
+  password: string
+}
