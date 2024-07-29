@@ -41,6 +41,7 @@ const RegisterForm = () => {
             name="password"
             register={register}
             placeholder="Password"
+            type="password"
             options={{
               required: {
                 value: true,
@@ -54,6 +55,7 @@ const RegisterForm = () => {
             name="confirmPassword"
             register={register}
             placeholder="Confirm password"
+            type="password"
             options={{
               required: {
                 value: true,
