@@ -17,7 +17,7 @@ export const addWebsite = async (req: Request<{}, {}, WebsiteBody>, res: Respons
   })
 
   if (foundWebsite) {
-    return res.status(400).json({ message: 'Website already exists.' })
+    return res.status(409).json({ message: 'Website already exists.' })
   }
 
   // ! TEMPORARY: Hardcoded user id

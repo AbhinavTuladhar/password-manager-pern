@@ -13,7 +13,7 @@ export const addAccount = async (req: Request<{}, {}, AccountBody>, res: Respons
   })
 
   if (foundAccount) {
-    return res.status(400).json({ message: 'Account already exists.' })
+    return res.status(409).json({ message: 'Account already exists.' })
   }
 
   if (!password || !websiteId || !userName) {
