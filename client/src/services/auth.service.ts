@@ -15,12 +15,14 @@ class AuthService {
           headers: {
             'Content-Type': 'application/json',
           },
-          validateStatus: status => (status >= 200 && status < 300) || status >= 400,
+          validateStatus: status =>
+            (status >= 200 && status < 300) || (status >= 400 && status !== 400),
         },
       )
       return response
     } catch (error) {
       console.error(error)
+      throw error
     }
   }
 }

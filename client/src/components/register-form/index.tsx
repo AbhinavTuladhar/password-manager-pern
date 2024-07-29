@@ -12,22 +12,28 @@ const RegisterForm = () => {
     handleSubmit,
     formState: { errors },
     setError,
-    // reset,
+    reset,
   } = useForm<RegisterProps>()
 
   const { mutate } = useMutation({
     mutationFn: AuthService.register,
+    onSuccess: () => {
+      console.log('Success!')
+      reset()
+    },
+    onError: () => {
+      console.log('Error!')
+    },
   })
 
   const onSubmit = (data: RegisterProps) => {
-    mutate(data.password)
     if (data.password !== data.confirmPassword) {
       setError('confirmPassword', {
         message: 'Passwords do not match',
       })
       return
     }
-    console.log(data)
+    mutate(data.password)
   }
 
   return (
