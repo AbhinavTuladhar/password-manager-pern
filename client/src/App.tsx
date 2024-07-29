@@ -1,6 +1,18 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+import Navbar from './components/navbar'
+import AppRouter from './components/router'
+
 const App = () => {
+  const client = new QueryClient()
+
   return (
-    <div className="min-h-dvh bg-slate-800 text-white">This is the client.</div>
+    <QueryClientProvider client={client}>
+      <div className="flex min-h-dvh flex-col bg-slate-800 text-white">
+        <Navbar />
+        <AppRouter />
+      </div>
+    </QueryClientProvider>
   )
 }
 
