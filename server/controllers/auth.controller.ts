@@ -55,11 +55,11 @@ export const loginUser = async (req: Request<{}, {}, Credentials>, res: Response
 
     return res
       .status(200)
-      .json({ message: 'Successfully logged in!', accessToken: token })
       .cookie('accessToken', token, {
         httpOnly: true,
         expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
       })
+      .json({ message: 'Successfully logged in!', accessToken: token })
   } else {
     return res.status(401).json({ message: 'The password does not match!' }) // Unauthorized
   }
