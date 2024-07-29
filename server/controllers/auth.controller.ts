@@ -53,13 +53,13 @@ export const loginUser = async (req: Request<{}, {}, Credentials>, res: Response
     const { passwordHash, ...user } = foundUser
     const token = jwt.sign(user, process.env.JWT_SECRET, jwtOptions)
 
-    // Expire the token in a day
-    res.cookie('accessToken', token, {
-      httpOnly: true,
-      expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
-    })
-
-    return res.status(200).json({ message: 'Successfully logged in!', accessToken: token })
+    return res
+      .status(200)
+      .json({ message: 'Successfully logged in!', accessToken: token })
+      .cookie('accessToken', token, {
+        httpOnly: true,
+        expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+      })
   } else {
     return res.status(401).json({ message: 'The password does not match!' }) // Unauthorized
   }
