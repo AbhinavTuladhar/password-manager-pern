@@ -4,7 +4,7 @@ import Button from '../button'
 
 const Navbar = () => {
   return (
-    <header className="flex w-full items-center justify-between bg-blue-500 px-4 py-5">
+    <header className="flex w-full items-center justify-between bg-blue-600 px-4 py-5">
       <h1 className="text-2xl font-bold">PassManager</h1>
       <nav className="flex gap-x-4">
         <Link to="/register">
