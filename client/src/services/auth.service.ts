@@ -1,20 +1,14 @@
-import axios from 'axios'
-
 import { BasicResponse, LoginResponse } from '../types/response'
+
+import Api from './api.service'
 
 class AuthService {
   static async register(password: string) {
-    const registerUrl = import.meta.env.VITE_BACKEND_URL + '/master-user/register'
-
-    // use the register route
     try {
-      const response = await axios.post<BasicResponse>(
-        registerUrl,
+      const response = await Api.post<BasicResponse>(
+        '/master-user/register',
         { password },
         {
-          headers: {
-            'Content-Type': 'application/json',
-          },
           validateStatus: status =>
             (status >= 200 && status < 300) || (status >= 400 && status !== 409),
         },
@@ -27,16 +21,11 @@ class AuthService {
   }
 
   static async login(password: string) {
-    const loginUrl = import.meta.env.VITE_BACKEND_URL + '/master-user/login'
-
     try {
-      const response = await axios.post<LoginResponse>(
-        loginUrl,
+      const response = await Api.post<LoginResponse>(
+        '/master-user/login',
         { password },
         {
-          headers: {
-            'Content-Type': 'application/json',
-          },
           validateStatus: status =>
             (status >= 200 && status < 300) || (status >= 400 && status !== 401 && status !== 404),
         },
