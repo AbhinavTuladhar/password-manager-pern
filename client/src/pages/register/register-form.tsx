@@ -41,7 +41,7 @@ const RegisterForm = () => {
       <h2 className="text-xl font-bold"> Registration form</h2>
       <form className="flex flex-col gap-y-8" onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-6">
-          <Input
+          <Input<RegisterProps>
             minLength={1}
             error={errors.password}
             name="password"
@@ -55,7 +55,7 @@ const RegisterForm = () => {
               },
             }}
           />
-          <Input
+          <Input<RegisterProps>
             minLength={1}
             error={errors.confirmPassword}
             name="confirmPassword"
