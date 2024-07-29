@@ -2,9 +2,10 @@ import { useForm } from 'react-hook-form'
 
 import { useMutation } from '@tanstack/react-query'
 
+import FormContainer from '../../components/form-container'
+import Input from '../../components/input'
 import AuthService from '../../services/auth.service'
 import { RegisterProps } from '../../types/forms'
-import Input from '../input'
 
 const RegisterForm = () => {
   const {
@@ -37,7 +38,7 @@ const RegisterForm = () => {
   }
 
   return (
-    <div className="w-container space-y-12 rounded-md bg-indigo-700 p-8 shadow-md shadow-slate-600">
+    <FormContainer>
       <h2 className="text-xl font-bold"> Registration form</h2>
       <form className="flex flex-col gap-y-8" onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-6">
@@ -74,7 +75,7 @@ const RegisterForm = () => {
           Submit
         </button>
       </form>
-    </div>
+    </FormContainer>
   )
 }
 

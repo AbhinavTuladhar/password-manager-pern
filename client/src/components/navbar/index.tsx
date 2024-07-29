@@ -10,7 +10,7 @@ const Navbar = () => {
         <Link to="/register">
           <Button variant="coloured"> Register</Button>
         </Link>
-        <Link to="/">
+        <Link to="/login">
           <Button variant="transparent"> Log in </Button>
         </Link>
       </nav>
