@@ -1,8 +1,8 @@
 import { FC, InputHTMLAttributes, useState } from 'react'
 import type { FieldError, RegisterOptions, UseFormRegister } from 'react-hook-form'
 
-import EyeIcon from '../../assets/eye-icon.svg'
-import { RegisterFields, RegisterProps } from '../../types/forms'
+import EyeIcon from '@/assets/eye-icon.svg'
+import { RegisterFields, RegisterProps } from '@/types/forms'
 
 interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   name: RegisterFields

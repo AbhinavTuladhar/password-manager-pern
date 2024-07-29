@@ -1,11 +1,10 @@
 import { useForm } from 'react-hook-form'
 
+import FormContainer from '@/components/form-container'
+import Input from '@/components/input'
+import AuthService from '@/services/auth.service'
+import { RegisterProps } from '@/types/forms'
 import { useMutation } from '@tanstack/react-query'
-
-import FormContainer from '../../components/form-container'
-import Input from '../../components/input'
-import AuthService from '../../services/auth.service'
-import { RegisterProps } from '../../types/forms'
 
 const RegisterForm = () => {
   const {
