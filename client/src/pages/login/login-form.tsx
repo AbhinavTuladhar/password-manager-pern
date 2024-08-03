@@ -1,7 +1,9 @@
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 import FormContainer from '@/components/form-container'
 import Input from '@/components/input'
+import useAuth from '@/hooks/useAuth'
 import AuthService from '@/services/auth.service'
 import { LoginProps } from '@/types/forms'
 import { useMutation } from '@tanstack/react-query'
@@ -13,6 +15,10 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm<LoginProps>()
 
+  const { setIsAuthenticated } = useAuth()
+
+  const navigate = useNavigate()
+
   const { mutate } = useMutation({
     mutationFn: AuthService.login,
     onError: () => {
@@ -20,6 +26,11 @@ const LoginForm = () => {
     },
     onSuccess: () => {
       console.log('Success!')
+      setIsAuthenticated(true)
+
+      setTimeout(() => {
+        navigate('/')
+      }, 1500)
     },
   })
 

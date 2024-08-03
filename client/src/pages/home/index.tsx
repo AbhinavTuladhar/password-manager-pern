@@ -1,5 +1,9 @@
+import useAuth from '@/hooks/useAuth'
+
 const Home = () => {
-  return <div>This is the home page</div>
+  const { isAuthenticated } = useAuth()
+
+  return <div>{isAuthenticated ? 'Hello World' : 'Please login'}</div>
 }
 
 export default Home
