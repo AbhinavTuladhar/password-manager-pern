@@ -31,3 +31,9 @@ export const addWebsite = async (req: Request<{}, {}, WebsiteBody>, res: Respons
 
   return res.status(201).json({ message: 'Website successfully created.' })
 }
+
+export const getAllWebsites = async (req: Request, res: Response) => {
+  const websites = await prisma.website.findMany()
+
+  return res.status(200).json({ message: 'Success!', data: websites })
+}
