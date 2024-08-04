@@ -2,8 +2,13 @@ import { Request, Response } from 'express'
 import prisma from '../prisma'
 import { AccountBody, WebsiteBody } from '../types'
 
-export const addAccount = async (req: Request<{}, {}, AccountBody>, res: Response) => {
-  const { userName, password, websiteId } = req.body
+export const addAccount = async (
+  req: Request<{ websiteId: string }, {}, AccountBody>,
+  res: Response,
+) => {
+  const { userName, password } = req.body
+
+  const { websiteId } = req.params
 
   // Check if any similar username exists in the website.
   const foundAccount = await prisma.account.findFirst({
