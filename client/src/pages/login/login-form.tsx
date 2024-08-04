@@ -27,10 +27,7 @@ const LoginForm = () => {
     onSuccess: () => {
       console.log('Success!')
       setIsAuthenticated(true)
-
-      setTimeout(() => {
-        navigate('/')
-      }, 1500)
+      navigate('/')
     },
   })
 
