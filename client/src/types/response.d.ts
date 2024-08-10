@@ -15,12 +15,17 @@ export interface Website {
   updatedAt: Date
 }
 
-export interface WebsiteListResponse extends BasicResponse {
+export interface WebsiteList extends BasicResponse {
   data: Array<Pick<Website, 'id' | 'name' | 'url'> & { accounts: number }>
 }
+export interface InnerWebsiteDetail extends Website {
+  id: string
+  userId: string
+  accounts: Array<Omit<Account, 'website'>>
+}
 
-export interface WebsiteResponse extends BasicResponse {
-  data: Array<Website>
+export interface WebsiteDetail extends BasicResponse {
+  data: InnerWebsiteDetail
 }
 
 export interface Account {
