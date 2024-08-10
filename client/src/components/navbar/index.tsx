@@ -13,7 +13,7 @@ const Navbar = () => {
         <h1 className="text-2xl font-bold">PassManager</h1>
       </Link>
       <nav className="flex items-center gap-x-4">
-        <Link to="/websites">Websites</Link>
+        <Link to="/website">Websites</Link>
         <Link to="/register">
           <Button variant="coloured"> Register</Button>
         </Link>

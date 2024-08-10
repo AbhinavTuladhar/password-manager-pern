@@ -3,6 +3,6 @@ import { addAccount } from '../controllers/account.controller'
 
 const accountRouter = Router()
 
-accountRouter.use('/', addAccount)
+accountRouter.post('/', addAccount)
 
 export default accountRouter

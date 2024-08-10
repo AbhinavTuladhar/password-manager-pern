@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 
 const jwtOptions: jwt.SignOptions = {
-  expiresIn: '15m',
+  expiresIn: '1d',
 }
 
 export default jwtOptions

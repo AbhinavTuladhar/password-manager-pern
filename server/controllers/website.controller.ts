@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import prisma from '../prisma'
 import { WebsiteBody } from '../types'
+import { decrypt } from '../utils/crypto.utils'
 
 export const addWebsite = async (req: Request<{}, {}, WebsiteBody>, res: Response) => {
   const { name, url } = req.body
@@ -32,8 +33,62 @@ export const addWebsite = async (req: Request<{}, {}, WebsiteBody>, res: Respons
   return res.status(201).json({ message: 'Website successfully created.' })
 }
 
+// Get the information of all the websites, but only the basic information.
 export const getAllWebsites = async (req: Request, res: Response) => {
-  const websites = await prisma.website.findMany()
+  const websites = await prisma.website.findMany({
+    include: {
+      _count: {
+        select: {
+          Account: true,
+        },
+      },
+    },
+  })
 
-  return res.status(200).json({ message: 'Success!', data: websites })
+  const includedResponse = websites.map((website) => ({
+    id: website.id,
+    name: website.name,
+    url: website.url,
+    accounts: website._count.Account,
+  }))
+
+  return res.status(200).json({ message: 'Success!', data: includedResponse })
+}
+
+export const getWebsiteDetail = async (
+  req: Request<{ websiteId: string }, {}, {}>,
+  res: Response,
+) => {
+  const { websiteId } = req.params
+
+  const accounts = await prisma.account.findMany({
+    where: {
+      websiteId,
+    },
+  })
+
+  const website = await prisma.website.findUnique({
+    where: {
+      id: websiteId,
+    },
+  })
+
+  if (!website) {
+    return res.status(404).json({ message: 'Website not found.' })
+  }
+
+  const decryptedAccounts = accounts.map((account) => {
+    const { password, userName } = account
+    const decryptedPassword = decrypt(password)
+    return {
+      userName,
+      password: decryptedPassword,
+    }
+  })
+
+  const apiResponse = {
+    ...website,
+    accounts: decryptedAccounts,
+  }
+  return res.status(200).json({ message: 'Success!', data: apiResponse })
 }
