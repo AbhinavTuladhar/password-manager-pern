@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import prisma from '../prisma'
 import { WebsiteBody } from '../types'
+import { decrypt } from '../utils/crypto.utils'
 
 export const addWebsite = async (req: Request<{}, {}, WebsiteBody>, res: Response) => {
   const { name, url } = req.body
@@ -36,4 +37,34 @@ export const getAllWebsites = async (req: Request, res: Response) => {
   const websites = await prisma.website.findMany()
 
   return res.status(200).json({ message: 'Success!', data: websites })
+}
+
+export const getAccountsFromWebsite = async (
+  req: Request<{ websiteId: string }, {}, {}>,
+  res: Response,
+) => {
+  const { websiteId } = req.params
+
+  const accounts = await prisma.account.findMany({
+    where: {
+      websiteId,
+    },
+  })
+
+  const website = await prisma.website.findUnique({
+    where: {
+      id: websiteId,
+    },
+  })
+
+  const decryptedAccounts = accounts.map((account) => {
+    const { password, userName } = account
+    const decryptedPassword = decrypt(password)
+    return {
+      website: website?.name,
+      userName,
+      password: decryptedPassword,
+    }
+  })
+  return res.status(200).json({ message: 'Success!', data: decryptedAccounts })
 }

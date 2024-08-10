@@ -8,8 +8,6 @@ const authenticateJWT = (req: Request, res: Response, next: NextFunction) => {
 
   const cookieToken = cookie?.split('=')[1]
 
-  console.log('The token via header is', token)
-
   if (!cookieToken) {
     return res.status(401).json({ message: 'Unauthorized' })
   }

@@ -14,7 +14,6 @@ export const decrypt = (encryptedData: string) => {
   const bufferIv = Buffer.from(process.env.AES_IV, 'base64')
 
   const deciphered = crypto.createDecipheriv('aes-256-cbc', bufferKey, bufferIv)
-  console.log(deciphered)
   let decrypted = deciphered.update(encryptedData, 'base64', 'utf8')
   decrypted += deciphered.final('utf8')
   return decrypted
