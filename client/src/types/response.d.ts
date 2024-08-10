@@ -15,6 +15,10 @@ export interface Website {
   updatedAt: Date
 }
 
+export interface WebsiteListResponse extends BasicResponse {
+  data: Array<Pick<Website, 'id' | 'name' | 'url'> & { accounts: number }>
+}
+
 export interface WebsiteResponse extends BasicResponse {
   data: Array<Website>
 }
@@ -26,5 +30,8 @@ export interface Account {
 }
 
 export interface AccountResponse extends BasicResponse {
-  data: Array<Account>
+  data: {
+    website: string
+    accounts: Array<Account>
+  }
 }

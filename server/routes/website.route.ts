@@ -1,9 +1,5 @@
 import { Router } from 'express'
-import {
-  addWebsite,
-  getAccountsFromWebsite,
-  getAllWebsites,
-} from '../controllers/website.controller'
+import { addWebsite, getWebsiteDetail, getAllWebsites } from '../controllers/website.controller'
 import { addAccount } from '../controllers/account.controller'
 
 const websiteRouter = Router()
@@ -11,6 +7,6 @@ const websiteRouter = Router()
 websiteRouter.post('/', addWebsite)
 websiteRouter.get('/', getAllWebsites)
 websiteRouter.post('/:websiteId/account', addAccount)
-websiteRouter.get('/:websiteId/account', getAccountsFromWebsite)
+websiteRouter.get('/:websiteId', getWebsiteDetail)
 
 export default websiteRouter

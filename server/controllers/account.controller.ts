@@ -14,7 +14,7 @@ export const addAccount = async (
   // Check if any similar username exists in the website.
   const foundAccount = await prisma.account.findFirst({
     where: {
-      OR: [{ userName }, { websiteId }],
+      userName,
     },
   })
 
