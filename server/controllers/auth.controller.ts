@@ -64,3 +64,10 @@ export const loginUser = async (req: Request<{}, {}, Credentials>, res: Response
     return res.status(401).json({ message: 'The password does not match!' }) // Unauthorized
   }
 }
+
+export const logoutUser = async (req: Request, res: Response) => {
+  return res
+    .clearCookie('accessToken', { httpOnly: true })
+    .status(200)
+    .json({ message: 'Successfully logged out!' })
+}
