@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import useAuth from '@/hooks/useAuth'
 
 import Button from '../button'
+import LogoutButton from '../logout-button'
 
 const Navbar = () => {
   const { isAuthenticated } = useAuth()
@@ -22,7 +23,7 @@ const Navbar = () => {
             <Button variant="transparent"> Log in </Button>
           </Link>
         ) : (
-          <span> Logout</span>
+          <LogoutButton />
         )}
       </nav>
     </header>
