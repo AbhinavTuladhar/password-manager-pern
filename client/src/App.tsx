@@ -12,7 +12,7 @@ const App = () => {
       <AuthProvider>
         <div className="flex min-h-dvh flex-col bg-slate-800 text-white">
           <Navbar />
-          <div className="container flex flex-1 flex-col px-4">
+          <div className="container mx-auto flex flex-1 flex-col px-4">
             <AppRouter />
           </div>
         </div>

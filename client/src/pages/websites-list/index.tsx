@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom'
-
 import WebsiteService from '@/services/website.service'
 import { useQuery } from '@tanstack/react-query'
+
+import WebsiteListTable from './website-table'
 
 const Websites = () => {
   const { data, isLoading, error } = useQuery({
@@ -16,13 +16,9 @@ const Websites = () => {
   if (!data) return <div> No data to be found.</div>
 
   return (
-    <div className="">
-      <h1 className="text-xl font-bold">List of websites</h1>
-      {data.data.map(website => (
-        <div key={website.id}>
-          <Link to={`/website/${website.id}`}>{website.name}</Link>
-        </div>
-      ))}
+    <div className="space-y-10 py-4">
+      <h1 className="text-center text-4xl font-bold">List of websites</h1>
+      <WebsiteListTable data={data.data} />
     </div>
   )
 }

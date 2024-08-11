@@ -15,8 +15,10 @@ export interface Website {
   updatedAt: Date
 }
 
+export type SimpleWebsite = Pick<Website, 'id' | 'name' | 'url'> & { accounts: number }
+
 export interface WebsiteList extends BasicResponse {
-  data: Array<Pick<Website, 'id' | 'name' | 'url'> & { accounts: number }>
+  data: Array<SimpleWebsite>
 }
 export interface InnerWebsiteDetail extends Website {
   id: string
