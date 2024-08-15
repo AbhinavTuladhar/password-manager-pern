@@ -2,7 +2,7 @@ import RegisterForm from './register-form'
 
 const Register = () => {
   return (
-    <div className="grid flex-1 place-items-center">
+    <div className="grid h-full flex-1 place-items-center">
       <RegisterForm />
     </div>
   )
