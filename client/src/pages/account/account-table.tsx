@@ -1,5 +1,6 @@
 import { FC, useState } from 'react'
 
+import PasswordText from '@/components/password-text'
 import UrlLink from '@/components/url-link'
 import { Account } from '@/types/response'
 import {
@@ -38,7 +39,7 @@ const columns = [
   }),
   columnHelper.accessor('password', {
     header: () => <span> Password </span>,
-    cell: info => <span> {info.getValue()}</span>,
+    cell: info => <PasswordText text={info.getValue()} />,
   }),
   columnHelper.display({
     id: 'actions',

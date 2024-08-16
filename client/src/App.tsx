@@ -1,8 +1,12 @@
+import { Slide, ToastContainer } from 'react-toastify'
+
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import Navbar from './components/navbar'
 import AppRouter from './components/router'
 import { AuthProvider } from './context/auth-provider'
+
+import 'react-toastify/dist/ReactToastify.css'
 
 const App = () => {
   const client = new QueryClient()
@@ -17,6 +21,7 @@ const App = () => {
           </div>
         </div>
       </AuthProvider>
+      <ToastContainer autoClose={2000} transition={Slide} />
     </QueryClientProvider>
   )
 }
