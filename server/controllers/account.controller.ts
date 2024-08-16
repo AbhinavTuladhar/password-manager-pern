@@ -1,20 +1,40 @@
 import { Request, Response } from 'express'
 import prisma from '../prisma'
-import { AccountBody, WebsiteBody } from '../types'
-import { encrypt } from '../utils/crypto.utils'
+import { AccountBody, AccountCreation, WebsiteBody } from '../types'
+import { decrypt, encrypt } from '../utils/crypto.utils'
 
-export const addAccount = async (
-  req: Request<{ websiteId: string }, {}, AccountBody>,
-  res: Response,
-) => {
-  const { userName, password } = req.body
+export const getAllAccounts = async (req: Request, res: Response) => {
+  const accounts = await prisma.account.findMany({})
 
-  const { websiteId } = req.params
+  // Send only the relevant data in the api response.
+  const reducedData = accounts.map((account) => {
+    const { password, userName, websiteName, websiteUrl, email, id } = account
+
+    const decryptedPassword = decrypt(password)
+
+    return {
+      id,
+      userName,
+      password: decryptedPassword,
+      websiteName,
+      websiteUrl,
+      email,
+    }
+  })
+
+  return res.status(200).json({ message: 'Success!', data: reducedData })
+}
+
+export const addAccount = async (req: Request<{}, {}, AccountCreation>, res: Response) => {
+  // const { userName, password } = req.body
+
+  const { email, password, websiteName, websiteUrl, userId } = req.body
+  const userName = req.body?.userName || ''
 
   // Check if any similar username exists in the website.
   const foundAccount = await prisma.account.findFirst({
     where: {
-      userName,
+      AND: [{ userName }, { email }, { websiteName }],
     },
   })
 
@@ -22,19 +42,22 @@ export const addAccount = async (
     return res.status(409).json({ message: 'Account already exists.' })
   }
 
-  if (!password || !userName) {
-    return res.status(400).json({ message: 'Password and username are required.' })
+  if (!password || !userName || !email || !websiteName || !websiteUrl) {
+    return res.status(400).json({ message: 'All fields are required.' })
   }
 
   const encryptedPassword = encrypt(password)
 
-  const createdAccount = await prisma.account.create({
+  const newAccount = await prisma.account.create({
     data: {
+      userId,
       userName,
+      email,
       password: encryptedPassword,
-      websiteId,
+      websiteName,
+      websiteUrl,
     },
   })
 
-  return res.status(201).json({ message: 'Account successfully created.', account: createdAccount })
+  return res.status(201).json({ message: 'Account successfully created.', account: newAccount })
 }

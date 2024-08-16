@@ -1,8 +1,7 @@
 import { FC, useState } from 'react'
-import { Link } from 'react-router-dom'
 
 import UrlLink from '@/components/url-link'
-import { SimpleWebsite } from '@/types/response'
+import { Account } from '@/types/response'
 import {
   createColumnHelper,
   flexRender,
@@ -11,34 +10,35 @@ import {
 } from '@tanstack/react-table'
 
 interface TableProps {
-  data: Array<SimpleWebsite>
+  data: Array<Account>
 }
 
-const columnHelper = createColumnHelper<SimpleWebsite>()
+const columnHelper = createColumnHelper<Account>()
 
 const columns = [
   columnHelper.accessor('id', {
     header: () => <span> S.N. </span>,
     cell: info => info.row.index + 1,
   }),
-  columnHelper.accessor('name', {
-    header: () => <span> Name </span>,
-    cell: info => (
-      <Link
-        className="text-blue-500 duration-300 hover:text-red-500 hover:underline"
-        to={`/website/${info.row.original.id}`}
-      >
-        {info.getValue()}
-      </Link>
-    ),
+  columnHelper.accessor('userName', {
+    header: () => <span> User name</span>,
+    cell: info => <span> {info.getValue()}</span>,
   }),
-  columnHelper.accessor('url', {
-    header: () => <span> URL </span>,
+  columnHelper.accessor('email', {
+    header: () => <span> Email </span>,
+    cell: info => <span> {info.getValue()}</span>,
+  }),
+  columnHelper.accessor('websiteName', {
+    header: () => <span> Website name </span>,
+    cell: info => <span> {info.getValue()}</span>,
+  }),
+  columnHelper.accessor('websiteUrl', {
+    header: () => <span> Website URL </span>,
     cell: info => <UrlLink url={info.getValue()} />,
   }),
-  columnHelper.accessor('accounts', {
-    header: () => <span> No. of accounts </span>,
-    cell: info => info.getValue(),
+  columnHelper.accessor('password', {
+    header: () => <span> Password </span>,
+    cell: info => <span> {info.getValue()}</span>,
   }),
   columnHelper.display({
     id: 'actions',
@@ -47,7 +47,7 @@ const columns = [
   }),
 ]
 
-const WebsiteListTable: FC<TableProps> = ({ data }) => {
+const AccountTable: FC<TableProps> = ({ data }) => {
   const [tableData] = useState(() => [...data])
 
   const { getHeaderGroups, getRowModel } = useReactTable({
@@ -61,7 +61,7 @@ const WebsiteListTable: FC<TableProps> = ({ data }) => {
 
   return (
     <div className="flex">
-      <table className="mx-auto border-t border-t-slate-600">
+      <table className="mx-auto overflow-auto border-t border-t-slate-600">
         <thead>
           {tableHeaders.map(headerGroup => (
             <tr key={headerGroup.id}>
@@ -91,4 +91,4 @@ const WebsiteListTable: FC<TableProps> = ({ data }) => {
   )
 }
 
-export default WebsiteListTable
+export default AccountTable

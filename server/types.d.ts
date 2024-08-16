@@ -14,3 +14,12 @@ export interface AccountBody {
   password: string
   websiteId: string
 }
+
+export interface AccountCreation {
+  email: string
+  password: string
+  websiteName: string
+  websiteUrl: string
+  userName: string
+  userId: string
+}

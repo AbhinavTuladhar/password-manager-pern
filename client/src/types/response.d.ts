@@ -31,14 +31,14 @@ export interface WebsiteDetail extends BasicResponse {
 }
 
 export interface Account {
-  website: string
+  id: string
   userName: string
   password: string
+  websiteName: string
+  websiteUrl: string
+  email: string
 }
 
-export interface AccountResponse extends BasicResponse {
-  data: {
-    website: string
-    accounts: Array<Account>
-  }
+export interface AccountList extends BasicResponse {
+  data: Array<Account>
 }
