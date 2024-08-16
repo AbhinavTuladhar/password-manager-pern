@@ -8,22 +8,25 @@ import { AuthProvider } from './context/auth-provider'
 
 import 'react-toastify/dist/ReactToastify.css'
 
-const App = () => {
-  const client = new QueryClient()
+// Create the QueryClient instance outside the component to avoid re-creating on each render
+const queryClient = new QueryClient()
 
-  return (
-    <QueryClientProvider client={client}>
-      <AuthProvider>
-        <div className="flex min-h-dvh flex-col bg-slate-800 text-white">
-          <Navbar />
-          <div className="container mx-auto flex flex-1 flex-col px-4">
-            <AnimatedRoutes />
-          </div>
-        </div>
-      </AuthProvider>
-      <ToastContainer autoClose={2000} transition={Slide} />
-    </QueryClientProvider>
-  )
-}
+const AppLayout = ({ children }: { children: React.ReactNode }) => (
+  <div className="flex min-h-dvh flex-col overflow-hidden bg-slate-800 text-white">
+    <Navbar />
+    <div className="container mx-auto flex flex-1 flex-col px-4">{children}</div>
+  </div>
+)
+
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <AuthProvider>
+      <AppLayout>
+        <AnimatedRoutes />
+      </AppLayout>
+    </AuthProvider>
+    <ToastContainer autoClose={2000} transition={Slide} />
+  </QueryClientProvider>
+)
 
 export default App

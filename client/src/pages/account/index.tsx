@@ -1,5 +1,4 @@
-import { motion } from 'framer-motion'
-
+import AnimatedPage from '@/components/animated-page'
 import AccountService from '@/services/account.service'
 import { useQuery } from '@tanstack/react-query'
 
@@ -12,28 +11,22 @@ const AccountList = () => {
   })
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <AnimatedPage>Loading...</AnimatedPage>
   }
 
   if (isError) {
-    return <div>Error</div>
+    return <AnimatedPage>Error</AnimatedPage>
   }
 
   if (!data) {
-    return <div>No data</div>
+    return <AnimatedPage>No data</AnimatedPage>
   }
 
   return (
-    <motion.div
-      key="accountList"
-      initial={{ opacity: 0, transitionDuration: '0.5s' }}
-      animate={{ opacity: 1, transitionDuration: '0.5s' }}
-      exit={{ opacity: 0, transitionDuration: '0.5s' }}
-      className="space-y-10 py-4"
-    >
+    <AnimatedPage className="space-y-10 py-4">
       <h1 className="text-center text-4xl font-bold">List of accounts</h1>
       <AccountTable data={data.data} />
-    </motion.div>
+    </AnimatedPage>
   )
 }
 
