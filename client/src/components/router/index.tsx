@@ -5,7 +5,6 @@ import Home from '@/pages/home'
 import Login from '@/pages/login'
 import Register from '@/pages/register'
 import WebsiteDetail from '@/pages/website-detail'
-import Websites from '@/pages/websites-list'
 
 import Protected from '../protected'
 
@@ -17,14 +16,6 @@ const AppRouter = () => {
       <Route path="/" element=<Home /> />
       <Route path="/register" element=<Register /> />
       <Route path="/login" element=<Login /> />
-      <Route
-        path="/website"
-        element={
-          <Protected>
-            <Websites />
-          </Protected>
-        }
-      />
       <Route
         path="/website/:id"
         element={
