@@ -8,11 +8,12 @@ export const getAllAccounts = async (req: Request, res: Response) => {
 
   // Send only the relevant data in the api response.
   const reducedData = accounts.map((account) => {
-    const { password, userName, websiteName, websiteUrl, email } = account
+    const { password, userName, websiteName, websiteUrl, email, id } = account
 
     const decryptedPassword = decrypt(password)
 
     return {
+      id,
       userName,
       password: decryptedPassword,
       websiteName,

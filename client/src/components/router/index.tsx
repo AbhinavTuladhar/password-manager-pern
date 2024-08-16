@@ -1,5 +1,6 @@
 import { Route, Routes, useLocation } from 'react-router-dom'
 
+import AccountList from '@/pages/account'
 import Home from '@/pages/home'
 import Login from '@/pages/login'
 import Register from '@/pages/register'
@@ -29,6 +30,14 @@ const AppRouter = () => {
         element={
           <Protected>
             <WebsiteDetail />
+          </Protected>
+        }
+      />
+      <Route
+        path="/accounts"
+        element={
+          <Protected>
+            <AccountList />
           </Protected>
         }
       />
