@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion'
+
 import AccountService from '@/services/account.service'
 import { useQuery } from '@tanstack/react-query'
 
@@ -22,10 +24,16 @@ const AccountList = () => {
   }
 
   return (
-    <div className="space-y-10 py-4">
+    <motion.div
+      key="accountList"
+      initial={{ opacity: 0, transitionDuration: '0.5s' }}
+      animate={{ opacity: 1, transitionDuration: '0.5s' }}
+      exit={{ opacity: 0, transitionDuration: '0.5s' }}
+      className="space-y-10 py-4"
+    >
       <h1 className="text-center text-4xl font-bold">List of accounts</h1>
       <AccountTable data={data.data} />
-    </div>
+    </motion.div>
   )
 }
 

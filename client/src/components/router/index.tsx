@@ -8,10 +8,10 @@ import Register from '@/pages/register'
 import Protected from '../protected'
 
 const AppRouter = () => {
-  const { pathname } = useLocation()
+  const location = useLocation()
 
   return (
-    <Routes location={pathname}>
+    <Routes location={location} key={location.pathname}>
       <Route path="/" element=<Home /> />
       <Route path="/register" element=<Register /> />
       <Route path="/login" element=<Login /> />
