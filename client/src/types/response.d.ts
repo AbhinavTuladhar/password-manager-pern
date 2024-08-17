@@ -40,6 +40,10 @@ export interface Account {
   email: string
 }
 
+export interface SingleAccount extends BasicResponse {
+  account: Account
+}
+
 export interface AccountList extends BasicResponse {
   data: Array<Account>
 }

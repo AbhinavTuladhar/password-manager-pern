@@ -59,5 +59,10 @@ export const addAccount = async (req: Request<{}, {}, AccountCreation>, res: Res
     },
   })
 
-  return res.status(201).json({ message: 'Account successfully created.', account: newAccount })
+  const { id } = newAccount
+
+  return res.status(201).json({
+    message: 'Account successfully created.',
+    account: { id, userName, password, websiteName, websiteUrl, email },
+  })
 }

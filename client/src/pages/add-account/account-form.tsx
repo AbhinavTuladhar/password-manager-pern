@@ -6,7 +6,8 @@ import Input from '@/components/input'
 import useAuth from '@/hooks/useAuth'
 import AccountService from '@/services/account.service'
 import { AddAccountProps } from '@/types/forms'
-import { useMutation } from '@tanstack/react-query'
+import { AccountList } from '@/types/response'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 const AccountForm = () => {
   const {
@@ -15,6 +16,8 @@ const AccountForm = () => {
     formState: { errors },
     reset,
   } = useForm<AddAccountProps>()
+
+  const queryClient = useQueryClient()
 
   const { userId } = useAuth()
 
@@ -25,8 +28,13 @@ const AccountForm = () => {
       console.log('Error!')
     },
     onSuccess: data => {
+      const existingList: AccountList | undefined = queryClient.getQueryData(['accountList'])
+
+      // Response should be in the form of { message, data}
+      const updatedData = [...(existingList?.data || []), data.account]
+      queryClient.setQueryData(['accountList'], { message: '', data: updatedData })
+      console.log(queryClient.getQueryData(['accountList']))
       toast.success('Account added successfully')
-      console.log(data)
       reset()
     },
   })
