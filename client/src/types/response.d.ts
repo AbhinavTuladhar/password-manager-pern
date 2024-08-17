@@ -4,6 +4,7 @@ export interface BasicResponse {
 
 export interface LoginResponse extends BasicResponse {
   accessToken: string
+  userId: string
 }
 
 export interface Website {

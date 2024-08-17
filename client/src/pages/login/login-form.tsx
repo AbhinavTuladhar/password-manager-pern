@@ -15,7 +15,7 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm<LoginProps>()
 
-  const { setIsAuthenticated } = useAuth()
+  const { setIsAuthenticated, setUserId } = useAuth()
 
   const navigate = useNavigate()
 
@@ -24,7 +24,8 @@ const LoginForm = () => {
     onError: () => {
       console.log('Error!')
     },
-    onSuccess: () => {
+    onSuccess: data => {
+      setUserId(data.data.userId)
       console.log('Success!')
       setIsAuthenticated(true)
       navigate('/')

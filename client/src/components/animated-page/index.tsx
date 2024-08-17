@@ -4,18 +4,27 @@ import { motion, Variants } from 'framer-motion'
 const variants: Variants = {
   initial: {
     opacity: 0,
-    x: '-100px',
+    x: '-40px',
     transitionTimingFunction: 'ease-in-out',
+    transition: {
+      type: 'tween',
+    },
   },
   animate: {
     opacity: 1,
     x: 0,
     transitionTimingFunction: 'ease-in-out',
+    transition: {
+      type: 'tween',
+    },
   },
   exit: {
     opacity: 0,
-    x: '100px',
+    x: '40px',
     transitionTimingFunction: 'ease-in-out',
+    transition: {
+      type: 'tween',
+    },
   },
 }
 

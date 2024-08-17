@@ -1,6 +1,7 @@
 import { Route, RouteProps, Routes, useLocation } from 'react-router-dom'
 
 import AccountList from '@/pages/account'
+import AddAccount from '@/pages/add-account'
 import Home from '@/pages/home'
 import Login from '@/pages/login'
 import Register from '@/pages/register'
@@ -34,6 +35,15 @@ const AppRouter = () => {
         </Protected>
       ),
       key: 'account',
+    },
+    {
+      path: '/add-account',
+      element: (
+        <Protected>
+          <AddAccount />
+        </Protected>
+      ),
+      key: 'add-account',
     },
   ]
 

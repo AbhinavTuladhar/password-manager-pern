@@ -1,4 +1,7 @@
+import { Link } from 'react-router-dom'
+
 import AnimatedPage from '@/components/animated-page'
+import Button from '@/components/button'
 import AccountService from '@/services/account.service'
 import { useQuery } from '@tanstack/react-query'
 
@@ -25,6 +28,9 @@ const AccountList = () => {
   return (
     <AnimatedPage className="space-y-10 py-4">
       <h1 className="text-center text-4xl font-bold">List of accounts</h1>
+      <Link to="/add-account">
+        <Button variant="coloured">Add account</Button>
+      </Link>
       <AccountTable data={data.data} />
     </AnimatedPage>
   )
