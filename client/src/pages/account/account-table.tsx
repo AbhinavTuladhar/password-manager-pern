@@ -67,7 +67,7 @@ const AccountTable: FC<TableProps> = ({ data }) => {
           {tableHeaders.map(headerGroup => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map(header => (
-                <th key={header.id} className="bg-gray-700 px-10 py-4">
+                <th key={header.id} className="bg-surface-mixed-200 px-10 py-4">
                   {header.isPlaceholder
                     ? null
                     : flexRender(header.column.columnDef.header, header.getContext())}
@@ -78,7 +78,7 @@ const AccountTable: FC<TableProps> = ({ data }) => {
         </thead>
         <tbody>
           {tableRows.rows.map(row => (
-            <tr className="odd:bg-blue-950" key={row.id}>
+            <tr className="" key={row.id}>
               {row.getVisibleCells().map(cell => (
                 <td key={cell.id} className="border-y border-y-slate-600 px-10 py-4">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}

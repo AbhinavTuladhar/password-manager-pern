@@ -12,9 +12,11 @@ import 'react-toastify/dist/ReactToastify.css'
 const queryClient = new QueryClient()
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => (
-  <div className="flex min-h-dvh flex-col overflow-hidden bg-slate-800 text-white">
+  <div className="flex min-h-dvh flex-col overflow-hidden text-white">
     <Navbar />
-    <div className="container mx-auto flex flex-1 flex-col px-4">{children}</div>
+    <div className="container mx-auto flex flex-1 flex-col bg-surface-mixed-100 px-4">
+      {children}
+    </div>
   </div>
 )
 

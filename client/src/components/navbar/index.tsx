@@ -9,7 +9,7 @@ const Navbar = () => {
   const { isAuthenticated } = useAuth()
 
   return (
-    <header className="flex w-full items-center justify-between bg-gradient-to-r from-blue-800 via-indigo-600 to-blue-700 p-4">
+    <header className="relative flex w-full items-center justify-between bg-surface-mixed-400 p-4 shadow-md shadow-gray-900">
       <Link to="/">
         <h1 className="text-2xl font-bold">PassManager</h1>
       </Link>

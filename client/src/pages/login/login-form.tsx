@@ -51,7 +51,7 @@ const LoginForm = () => {
           register={register}
           placeholder="Password"
         />
-        <button className="self-center rounded-lg bg-blue-400 px-10 py-2 duration-300 hover:bg-blue-500">
+        <button className="self-center rounded-lg bg-primary-300 px-10 py-2 duration-500 hover:bg-primary-400">
           Submit
         </button>
       </form>

@@ -1,22 +1,38 @@
-import React from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 
 import FormContainer from '@/components/form-container'
 import Input from '@/components/input'
 import useAuth from '@/hooks/useAuth'
+import AccountService from '@/services/account.service'
 import { AddAccountProps } from '@/types/forms'
+import { useMutation } from '@tanstack/react-query'
 
 const AccountForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<AddAccountProps>()
 
   const { userId } = useAuth()
 
+  const { mutate } = useMutation({
+    mutationFn: AccountService.createAccount,
+    onError: () => {
+      toast.error('Something went wrong!')
+      console.log('Error!')
+    },
+    onSuccess: data => {
+      toast.success('Account added successfully')
+      console.log(data)
+      reset()
+    },
+  })
+
   const onSubmit = (data: Omit<AddAccountProps, 'userId'>) => {
-    console.log(data)
+    mutate({ ...data, userId })
   }
 
   return (
