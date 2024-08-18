@@ -1,6 +1,7 @@
 import { Slide, ToastContainer } from 'react-toastify'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import AnimatedRoutes from './components/animated-routes'
 import Navbar from './components/navbar'
@@ -28,6 +29,7 @@ const App = () => (
       </AppLayout>
     </AuthProvider>
     <ToastContainer autoClose={2000} transition={Slide} />
+    <ReactQueryDevtools initialIsOpen={false} />
   </QueryClientProvider>
 )
 
