@@ -11,6 +11,8 @@ const AccountList = () => {
   const { data, isLoading, isError } = useQuery({
     queryKey: ['accountList'],
     queryFn: AccountService.getAccounts,
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
   })
 
   if (isLoading) {
