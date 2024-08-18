@@ -59,7 +59,7 @@ export const loginUser = async (req: Request<{}, {}, Credentials>, res: Response
         httpOnly: true,
         expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
       })
-      .json({ message: 'Successfully logged in!', accessToken: token })
+      .json({ message: 'Successfully logged in!', accessToken: token, userId: foundUser.id })
   } else {
     return res.status(401).json({ message: 'The password does not match!' }) // Unauthorized
   }
