@@ -4,6 +4,8 @@ import useAuth from '@/hooks/useAuth'
 import AuthService from '@/services/auth.service'
 import { useMutation } from '@tanstack/react-query'
 
+import Button from '../button'
+
 const LogoutButton = () => {
   const { setIsAuthenticated } = useAuth()
   const navigate = useNavigate()
@@ -17,9 +19,9 @@ const LogoutButton = () => {
   })
 
   return (
-    <button className="rounded-lg border px-4 py-3" onClick={() => mutate()}>
+    <Button variant="transparent" onClick={() => mutate()}>
       Logout
-    </button>
+    </Button>
   )
 }
 

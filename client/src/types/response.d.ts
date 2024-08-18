@@ -4,6 +4,7 @@ export interface BasicResponse {
 
 export interface LoginResponse extends BasicResponse {
   accessToken: string
+  userId: string
 }
 
 export interface Website {
@@ -37,6 +38,10 @@ export interface Account {
   websiteName: string
   websiteUrl: string
   email: string
+}
+
+export interface SingleAccount extends BasicResponse {
+  account: Account
 }
 
 export interface AccountList extends BasicResponse {
