@@ -10,7 +10,7 @@ const BaseModal: FC<ModalProps> = ({ closeModal, isOpen, children }) => (
   <ReactModal
     isOpen={isOpen}
     overlayClassName="h-screen w-screen fixed grid place-items-center top-0 left-0 bg-black/70 z-50"
-    className="relative mx-auto w-[700px] max-w-full rounded-md bg-white px-10 py-16 text-black"
+    className="relative mx-auto w-[700px] max-w-full rounded-md bg-surface-mixed-200 px-10 py-16 text-white"
     shouldCloseOnOverlayClick={true}
     onRequestClose={closeModal}
     closeTimeoutMS={200}
