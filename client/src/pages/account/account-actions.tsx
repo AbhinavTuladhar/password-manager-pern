@@ -40,10 +40,25 @@ const AccountActions: FC<ActionsProps> = ({ id }) => {
     <div>
       <button onClick={openModal}>Delete </button>
       <BaseModal closeModal={closeModal} isOpen={isOpen}>
-        <button onClick={deleteAccount} className="rounded-lg bg-red-500 px-4 py-2">
-          {' '}
-          DELETE
-        </button>
+        <div className="flex flex-col items-center gap-y-8">
+          <h1 className="text-center text-2xl font-bold">
+            Are you sure you want to delete this account?
+          </h1>
+          <div className="flex gap-x-4">
+            <button
+              onClick={closeModal}
+              className="rounded-full border border-gray-200 px-10 py-4 duration-300 hover:bg-gray-600"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={deleteAccount}
+              className="rounded-full bg-red-500 px-10 py-4 text-white duration-300 hover:bg-red-400"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
       </BaseModal>
     </div>
   )
