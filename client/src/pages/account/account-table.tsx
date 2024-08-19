@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 
 import PasswordText from '@/components/password-text'
 import UrlLink from '@/components/url-link'
@@ -9,6 +9,8 @@ import {
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table'
+
+import AccountActions from './account-actions'
 
 interface TableProps {
   data: Array<Account>
@@ -41,15 +43,21 @@ const columns = [
     header: () => <span> Password </span>,
     cell: info => <PasswordText text={info.getValue()} />,
   }),
-  columnHelper.display({
-    id: 'actions',
+  columnHelper.accessor('id', {
     header: () => <span> Actions </span>,
-    cell: () => <div> Test </div>,
+    // cell: info => <span> {info.getValue()}</span>,
+    cell: info => <AccountActions id={info.getValue()} />,
   }),
 ]
 
 const AccountTable: FC<TableProps> = ({ data }) => {
-  const [tableData] = useState(() => [...data])
+  // const [tableData] = useState(() => [...data])
+
+  const [tableData, setTableData] = useState(() => [...data])
+
+  useEffect(() => {
+    setTableData([...data])
+  }, [data])
 
   const { getHeaderGroups, getRowModel } = useReactTable({
     data: tableData,
@@ -77,8 +85,8 @@ const AccountTable: FC<TableProps> = ({ data }) => {
           ))}
         </thead>
         <tbody>
-          {tableRows.rows.map(row => (
-            <tr className="" key={row.id}>
+          {tableRows.rows.map((row, index) => (
+            <tr className="" key={`${row.id} - ${index}`}>
               {row.getVisibleCells().map(cell => (
                 <td key={cell.id} className="border-y border-y-slate-600 px-10 py-4">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}

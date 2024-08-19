@@ -1,5 +1,5 @@
 import { AddAccountProps } from '@/types/forms'
-import { AccountList, SingleAccount } from '@/types/response'
+import { AccountList, BasicResponse, SingleAccount } from '@/types/response'
 
 import Api from './api.service'
 
@@ -23,6 +23,16 @@ class AccountService {
         validateStatus: status =>
           (status >= 200 && status < 300) || (status >= 400 && status !== 409),
       })
+      return response.data
+    } catch (error) {
+      console.error(error)
+      throw error
+    }
+  }
+
+  static async deleteAccount(id: string) {
+    try {
+      const response = await Api.delete<BasicResponse>('/account', { data: { id } })
       return response.data
     } catch (error) {
       console.error(error)

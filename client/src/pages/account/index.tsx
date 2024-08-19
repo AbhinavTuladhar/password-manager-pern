@@ -12,6 +12,7 @@ const AccountList = () => {
     queryKey: ['accountList'],
     queryFn: AccountService.getAccounts,
     refetchOnMount: true,
+
     refetchOnWindowFocus: true,
   })
 

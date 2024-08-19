@@ -1,9 +1,10 @@
 import { Router } from 'express'
-import { addAccount, getAllAccounts } from '../controllers/account.controller'
+import { addAccount, deleteAccount, getAllAccounts } from '../controllers/account.controller'
 
 const accountRouter = Router()
 
 accountRouter.get('/', getAllAccounts)
 accountRouter.post('/', addAccount)
+accountRouter.delete('/', deleteAccount)
 
 export default accountRouter
