@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import prisma from '../prisma'
-import { AccountBody, AccountCreation, WebsiteBody } from '../types'
+import { AccountBody, AccountCreation, DeleteResourceBody, WebsiteBody } from '../types'
 import { decrypt, encrypt } from '../utils/crypto.utils'
 
 export const getAllAccounts = async (req: Request, res: Response) => {
@@ -65,4 +65,20 @@ export const addAccount = async (req: Request<{}, {}, AccountCreation>, res: Res
     message: 'Account successfully created.',
     account: { id, userName, password, websiteName, websiteUrl, email },
   })
+}
+
+export const deleteAccount = async (req: Request<{}, {}, DeleteResourceBody>, res: Response) => {
+  const { id } = req.body
+
+  // Check if account exists
+  const foundAccount = await prisma.account.findFirst({ where: { id } })
+
+  if (!foundAccount) {
+    return res.status(404).json({ message: 'Account not found.' })
+  }
+
+  // Delete account
+  await prisma.account.delete({ where: { id } })
+
+  return res.status(200).json({ message: 'Account successfully deleted.' })
 }

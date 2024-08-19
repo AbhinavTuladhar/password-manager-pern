@@ -23,3 +23,7 @@ export interface AccountCreation {
   userName: string
   userId: string
 }
+
+export interface DeleteResourceBody {
+  id: string
+}

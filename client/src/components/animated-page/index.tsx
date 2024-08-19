@@ -4,7 +4,6 @@ import { motion, Variants } from 'framer-motion'
 const variants: Variants = {
   initial: {
     opacity: 0,
-    x: '-40px',
     transitionTimingFunction: 'ease-in-out',
     transition: {
       type: 'tween',
@@ -12,7 +11,6 @@ const variants: Variants = {
   },
   animate: {
     opacity: 1,
-    x: 0,
     transitionTimingFunction: 'ease-in-out',
     transition: {
       type: 'tween',
@@ -20,7 +18,6 @@ const variants: Variants = {
   },
   exit: {
     opacity: 0,
-    x: '40px',
     transitionTimingFunction: 'ease-in-out',
     transition: {
       type: 'tween',
