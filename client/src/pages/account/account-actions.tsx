@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { toast } from 'react-toastify'
 
+import Trash from '@/assets/trash-can.svg?react'
 import BaseModal from '@/components/modal'
 import useModal from '@/hooks/useModal'
 import AccountService from '@/services/account.service'
@@ -38,7 +39,11 @@ const AccountActions: FC<ActionsProps> = ({ id }) => {
 
   return (
     <div>
-      <button onClick={openModal}>Delete </button>
+      <button onClick={openModal}>
+        <div className="group rounded-lg border border-gray-600 bg-gradient-to-br from-surface-mixed-100 to-surface-mixed-200 p-4 duration-300 hover:border-red-400">
+          <Trash className="size-4 fill-white duration-300 group-hover:fill-red-400" />
+        </div>
+      </button>
       <BaseModal closeModal={closeModal} isOpen={isOpen}>
         <div className="flex flex-col items-center gap-y-8">
           <h1 className="text-center text-2xl font-bold">
